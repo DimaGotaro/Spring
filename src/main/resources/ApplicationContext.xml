@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="testBean"
+          class="org.example.testBean">
+        <constructor-arg value="Noitora"/>
+    </bean>
+
+    <bean id="RockBean"
+          class="org.example.RockMuzik">
+    </bean>
+
+    <bean id="ClaccikBean"
+          class="org.example.ClassikMuzik">
+    </bean>
+
+    <bean id="MetallBean"
+          class="org.example.MetalMuzik">
+    </bean>
+
+    <!--установка значений через конструктор-->
+    <bean id="MuzPlayer"
+          class="org.example.MuzikPlayer">
+        <constructor-arg ref="RockBean" />
+    </bean>
+
+    <!--через сеттер-->
+    <bean id="MuzPlayerS"
+          class="org.example.MuzikPlayer">
+        <property name="muzik" ref="RockBean" />
+        <!--передача значений полям класса-->
+        <!--<property name="name" value="Grigoriy" />
+        <property name="volume" value="54" />-->
+
+        <!--через файл properties-->
+        <property name="name" value="${muzikPlayer2.name}" />
+        <property name="volume" value="${muzikPlayer2.volume}" />
+
+        <property name="muz">
+            <list>
+                <ref bean="RockBean"></ref>
+                <ref bean="ClaccikBean"></ref>
+                <ref bean="MetallBean"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <context:property-placeholder location="classpath:muzicProp.properties" />
+
+</beans>
