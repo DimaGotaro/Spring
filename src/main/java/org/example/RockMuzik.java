@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class RockMuzik implements Muzik{
     @Override
-    public String getSong() {
-        return "Numb";
+    public String[] getSong() {
+        return new String[] {"Numb", "Highway to hell", "Кукушка"};
     }
 
     // фабричный метод

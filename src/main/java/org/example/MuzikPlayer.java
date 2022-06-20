@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class MuzikPlayer {
@@ -29,6 +30,9 @@ public class MuzikPlayer {
         this.muzik = muzik;
     }
 
+    public void playEmuz() {
+    }
+
     @Autowired // видит все классы применяющие интерфейс Muzik, должен быть только один
     public MuzikPlayer(@Qualifier("classikMuzik") Muzik muzik,
                        @Qualifier("rockMuzik") Muzik muzik2) {
@@ -36,6 +40,27 @@ public class MuzikPlayer {
         this.muzik2 = muzik2;
     }
 
+    public void playMuzMass() {
+        for (String r:
+                muzik.getSong()) {
+            System.out.println(r);
+        }
+        for (String r:
+                muzik2.getSong()) {
+            System.out.println(r);
+        }
+    }
+
+    public void playType(muzikType b) {
+        Random random = new Random();
+        int i = random.nextInt(3);
+        if (b == muzikType.CLASSIC) {
+            System.out.println(muzik.getSong()[i]);
+        }
+        else if (b == muzikType.ROCK) {
+            System.out.println(muzik2.getSong()[i]);
+        }
+    }
     public String playMuzR() {
         String a1 = "Проиграть: " + rockMuzik.getSong();
         String a2 = "Проиграть: " + classikMuzik.getSong();

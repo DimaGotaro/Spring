@@ -56,8 +56,11 @@ public class testSpring {
 
         MuzikPlayer muzikPlayer3 = context.getBean("muzikPlayer", MuzikPlayer.class);
         // через аннотацию, без прописывания bean в ApplicationContext.xml
-        muzikPlayer3.playMuz();
+//        muzikPlayer3.playMuz();
 //        System.out.println(muzikPlayer3.playMuzR());
+        muzikPlayer3.playMuzMass();
+        System.out.println();
+        muzikPlayer3.playType(muzikType.CLASSIC);
 
         context.close(); // всегда нужно закрывать
     }
