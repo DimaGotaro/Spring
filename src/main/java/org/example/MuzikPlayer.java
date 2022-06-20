@@ -2,38 +2,51 @@ package org.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Component
+//@Component
 public class MuzikPlayer {
 //    @Autowired // через поле
     private Muzik muzik;
     private Muzik muzik2;
+    @Value("${muzikPlayer2.name}")
     private String name;
+    @Value("${muzikPlayer2.volume}")
     private int volume;
     private List<Muzik> muz = new ArrayList<>();
 //    @Autowired
     private RockMuzik rockMuzik;
 //    @Autowired
     private ClassikMuzik classikMuzik;
-//    @Autowired
-    public MuzikPlayer(RockMuzik rockMuzik, ClassikMuzik classikMuzik) {
-        this.rockMuzik = rockMuzik;
-        this.classikMuzik = classikMuzik;
+
+    private List<Muzik> muzikList;
+
+    public MuzikPlayer(List<Muzik> muzikList) {
+        this.muzikList = muzikList;
     }
+
+    public void playT() {
+        Random random = new Random();
+        int i = random.nextInt(muzikList.size());
+        int o = random.nextInt(muzikList.get(i).getSong().length);
+        System.out.println(muzikList.get(i).getSong()[o]);
+    }
+//    @Autowired
+//    public MuzikPlayer(RockMuzik rockMuzik, ClassikMuzik classikMuzik) {
+//        this.rockMuzik = rockMuzik;
+//        this.classikMuzik = classikMuzik;
+//    }
 //    @Autowired
     public MuzikPlayer(@Qualifier("classikMuzik") Muzik muzik) {
         this.muzik = muzik;
     }
 
-    public void playEmuz() {
-    }
-
-    @Autowired // видит все классы применяющие интерфейс Muzik, должен быть только один
+//    @Autowired // видит все классы применяющие интерфейс Muzik, должен быть только один
     public MuzikPlayer(@Qualifier("classikMuzik") Muzik muzik,
                        @Qualifier("rockMuzik") Muzik muzik2) {
         this.muzik = muzik;
@@ -72,8 +85,6 @@ public class MuzikPlayer {
         System.out.println("Проиграть: " + muzik.getSong());
         System.out.println("Проиграть: " + muzik2.getSong());
     }
-
-    public MuzikPlayer() {}
 
     public Muzik getMuzik() {
         return muzik;

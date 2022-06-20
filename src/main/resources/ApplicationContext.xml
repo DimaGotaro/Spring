@@ -9,10 +9,10 @@
 
     <context:component-scan base-package="org.example" />
 
-    <bean id="testBean"
-          class="org.example.testBean">
-        <constructor-arg value="Noitora"/>
-    </bean>
+<!--    <bean id="testBean"-->
+<!--          class="org.example.testBean">-->
+<!--        <constructor-arg value="Noitora"/>-->
+<!--    </bean>-->
 
     <!--Вместо ручного создания бина, скажем спрингу что бы сам сохдавал через context:component-scan-->
 <!--    <bean id="RockBean"-->

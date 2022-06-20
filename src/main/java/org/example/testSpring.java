@@ -1,13 +1,20 @@
 package org.example;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.text.Annotation;
 
 public class testSpring {
     public static void main(String[] args) {
         // этот класс обращается к файлу ApplicationContext.xml, и помещает все bean в ApplicationContext
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "ApplicationContext.xml"
-        );
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//                "ApplicationContext.xml"
+//        ); // через отдельный файл ApplicationContext.xml
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringConfig.class
+        ); // через класс
 
         // получим bean из ApplicationContext
         testBean testBean1 = context.getBean("testBean", testBean.class);
@@ -58,9 +65,12 @@ public class testSpring {
         // через аннотацию, без прописывания bean в ApplicationContext.xml
 //        muzikPlayer3.playMuz();
 //        System.out.println(muzikPlayer3.playMuzR());
-        muzikPlayer3.playMuzMass();
-        System.out.println();
-        muzikPlayer3.playType(muzikType.CLASSIC);
+//        muzikPlayer3.playMuzMass();
+//        System.out.println();
+//        muzikPlayer3.playType(muzikType.CLASSIC);
+//        System.out.println(muzikPlayer3.getName());
+//        System.out.println(muzikPlayer3.getVolume());
+        muzikPlayer3.playT();
 
         context.close(); // всегда нужно закрывать
     }

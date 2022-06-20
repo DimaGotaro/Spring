@@ -8,7 +8,7 @@ public class Computer {
     private int id;
     private MuzikPlayer muzikPlayer;
 
-    @Autowired
+//    @Autowired
     public Computer(MuzikPlayer muzikPlayer) {
         this.id =1;
         this.muzikPlayer = muzikPlayer;
@@ -16,6 +16,6 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "Компьютер" + id + "\n" + muzikPlayer.playMuzR();
+        return "Компьютер " + id + "\n" + muzikPlayer.getMuzik().getSong()[0];
     }
 }
