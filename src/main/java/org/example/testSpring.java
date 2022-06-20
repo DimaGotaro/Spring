@@ -21,12 +21,43 @@ public class testSpring {
 //        MuzikPlayer muzikPlayer = context.getBean("MuzPlayer", MuzikPlayer.class);
 
         // Установка поля через сеттер, в классе должен быть пустой конструктор
-        MuzikPlayer muzikPlayer = context.getBean("MuzPlayerS", MuzikPlayer.class);
-        System.out.println(muzikPlayer.getMuzik().getSong());
-        System.out.println(muzikPlayer.getName());
-        System.out.println(muzikPlayer.getVolume());
-        System.out.println();
-        muzikPlayer.playMuzList();
+//        MuzikPlayer muzikPlayer = context.getBean("MuzPlayerS", MuzikPlayer.class);
+//        System.out.println(muzikPlayer.getMuzik().getSong());
+//        System.out.println(muzikPlayer.getName());
+//        System.out.println(muzikPlayer.getVolume());
+//        muzikPlayer.playMuzList();
+//        muzikPlayer.playMuz();
+//        muzikPlayer.playMuzR(); // через аннотации
+//        System.out.println();
+
+        // prototype
+//        MuzikPlayer muzikPlayer2 = context.getBean("MuzPlayerS", MuzikPlayer.class);
+//        boolean a1 = muzikPlayer == muzikPlayer2;
+//        System.out.println(a1); // true, scope = singleton
+//        System.out.println(muzikPlayer);
+//        System.out.println(muzikPlayer2);
+//        muzikPlayer.setVolume(66);
+//        System.out.println(muzikPlayer2.getVolume()); // singleton = 66, prototype = 25
+        // singleton - все вызовы getBean с одинаковыми объектами, prototype - все разные
+
+//        Muzik muzik = context.getBean("RockBean", RockMuzik.class);
+//        System.out.println(muzik.getSong());
+//
+//        Muzik muzik1 = context.getBean("classikMuzik", ClassikMuzik.class);
+//        System.out.println(muzik1.getSong());
+//
+//        MuzikPlayer muzikPlayer1 = new MuzikPlayer((muzik1));
+//        muzikPlayer1.playMuz();
+
+//        Computer computer = context.getBean("computer", Computer.class);
+//        System.out.println(computer.toString());
+//        System.out.println(computer); // то же что и при выводе toString
+//        System.out.println();
+
+        MuzikPlayer muzikPlayer3 = context.getBean("muzikPlayer", MuzikPlayer.class);
+        // через аннотацию, без прописывания bean в ApplicationContext.xml
+        muzikPlayer3.playMuz();
+//        System.out.println(muzikPlayer3.playMuzR());
 
         context.close(); // всегда нужно закрывать
     }
