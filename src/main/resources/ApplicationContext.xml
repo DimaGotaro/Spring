@@ -7,6 +7,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath:muzicProp.properties" />
+
+    <!--example-->
     <context:component-scan base-package="org.example" />
 
 <!--    <bean id="testBean"-->
@@ -59,6 +62,7 @@
 <!--        </property>-->
 <!--    </bean>-->
 
-    <context:property-placeholder location="classpath:muzicProp.properties" />
+
+    <!--mvc1-->
 
 </beans>
