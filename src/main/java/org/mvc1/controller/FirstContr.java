@@ -35,13 +35,14 @@ public class FirstContr {
                              @RequestParam(value = "b", required = false) Integer b,
                              @RequestParam(value = "c", required = false) String c,
                              Model model) {
-        Integer d = 0;
-        if (a != null) {
+//        System.out.println(a + " " + b);
+        double d = 0;
+        if (a != null & b != null) {
             if (Objects.equals(c, "multiplication")) {
                 d = a * b;
             }
             else if (Objects.equals(c, "division")) {
-                d = a / b;
+                d = (double) a / (double) b;
             }
             else if (Objects.equals(c, "addition")) {
                 d = a + b;
