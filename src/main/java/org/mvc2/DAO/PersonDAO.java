@@ -11,6 +11,7 @@ public class PersonDAO {
     private static int PEOPLE_COUNT;
     private List<Person> people;
 
+
     {
         people = new ArrayList<>();
 
@@ -21,6 +22,10 @@ public class PersonDAO {
         people.add(new Person(++PEOPLE_COUNT, "Rox"));
     }
 
+    public int p_count() {
+        return ++PEOPLE_COUNT;
+    }
+
     public List<Person> index() {
         return people;
     }
@@ -29,5 +34,20 @@ public class PersonDAO {
         return people.stream().filter(d -> d.getId() == id).findAny().orElse(null);
         // из списка ищем элемент у котороко id равен принимаемому id, находим его,
         // если нет возвращаем null
+    }
+    public static int getPeopleCount() {
+        return PEOPLE_COUNT;
+    }
+
+    public static void setPeopleCount(int peopleCount) {
+        PEOPLE_COUNT = peopleCount;
+    }
+
+    public List<Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(List<Person> people) {
+        this.people = people;
     }
 }

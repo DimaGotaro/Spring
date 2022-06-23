@@ -11,7 +11,7 @@
     	http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="org.mvc1"/>
+    <context:component-scan base-package="org.mvc2"/>
 
     <mvc:annotation-driven/>
 
