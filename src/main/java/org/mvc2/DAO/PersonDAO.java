@@ -26,6 +26,11 @@ public class PersonDAO {
         return ++PEOPLE_COUNT;
     }
 
+    public void save(Person person) {
+        person.setId(++PEOPLE_COUNT);
+        people.add(person);
+    }
+
     public List<Person> index() {
         return people;
     }

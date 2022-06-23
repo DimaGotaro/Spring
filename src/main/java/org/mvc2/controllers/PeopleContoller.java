@@ -41,4 +41,24 @@ public class PeopleContoller {
         personDAO.getPeople().add(new Person(personDAO.p_count(), pers));
         return "people/success";
     }
+//    @GetMapping("/new2") // то же самое
+//    public String newG2(Model model) {
+//        model.addAttribute("persModel", new Person());
+//        return "people/new2";
+//    }
+    @GetMapping("/new2") // то же самое
+    public String newG2(@ModelAttribute("persModel") Person person) {
+        return "people/new2";
+    }
+    @PostMapping("/p") // два post запроса не должны указывать на один URL
+    public String newP2(@ModelAttribute("persMatt") Person person) {
+        personDAO.save(person);
+        return "redirect:/people";
+    }
+
+    @ModelAttribute("modA") // добавляет ко всем моделям пару ключ(modA)-значение(Hello),
+    // доступен во всех методах контроллера
+    public String hey() {
+        return "Hello";
+    }
 }
