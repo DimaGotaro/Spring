@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class PersonDAO {
@@ -29,6 +30,20 @@ public class PersonDAO {
     public void save(Person person) {
         person.setId(++PEOPLE_COUNT);
         people.add(person);
+    }
+
+    public void edit(Person person) {
+        if (0 < person.getId() & person.getId() <= PEOPLE_COUNT & person.getName() != null) {
+//            Objects.requireNonNull(people.stream().filter(d -> d.getId() == person.getId()).
+//                    findAny().orElse(null)).setName(person.getName());
+            show(person.getId()).setName(person.getName());
+        }
+    }
+
+    public void delete(Person person) {
+        if (0 < person.getId() & person.getId() <= PEOPLE_COUNT) {
+            people.remove(show(person.getId()));
+        }
     }
 
     public List<Person> index() {

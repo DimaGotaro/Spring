@@ -56,9 +56,29 @@ public class PeopleContoller {
         return "redirect:/people";
     }
 
-    @ModelAttribute("modA") // добавляет ко всем моделям пару ключ(modA)-значение(Hello),
-    // доступен во всех методах контроллера
-    public String hey() {
-        return "Hello";
+    @GetMapping("/edit")
+    public String editG(@ModelAttribute("editMg") Person person) {
+        return "people/edit";
     }
+    @PostMapping("/e") // два post запроса не должны указывать на один URL
+    public String editP(@ModelAttribute("editMp") Person person) {
+        personDAO.edit(person);
+        return "redirect:/people";
+    }
+
+    @GetMapping("/delete")
+    public String deleteG(@ModelAttribute("delMg") Person person) {
+        return "people/delete";
+    }
+    @PostMapping("/d") // два post запроса не должны указывать на один URL
+    public String deleteP(@ModelAttribute("delMp") Person person) {
+        personDAO.delete(person);
+        return "redirect:/people";
+    }
+
+//    @ModelAttribute("modA") // добавляет ко всем моделям пару ключ(modA)-значение(Hello),
+//    // доступен во всех методах контроллера
+//    public String hey() {
+//        return "Hello";
+//    }
 }
