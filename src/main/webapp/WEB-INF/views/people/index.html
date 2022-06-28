@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All people</title>
@@ -7,8 +7,12 @@
 <body>
 <div th:each="person2 : ${people}">
     <!-- в таймлифе URL пишется в @{}-->
-    <a th:href="@{/people/{id}(id=${person2.getId()})}" th:text="${person2.getName()}"></a>
+    <a th:href="@{/people/{id}(id=${person2.getId()})}"
+       th:text="${person2.getName() + ', ' + person2.getAge()}"></a>
 </div>
+<hr/>
 <p th:text="${modA}"></p>
+<p>Введите</p>
+<a th:href="@{/people/new2}">New person</a>
 </body>
 </html>

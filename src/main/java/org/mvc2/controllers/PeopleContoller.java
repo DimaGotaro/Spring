@@ -1,10 +1,12 @@
 package org.mvc2.controllers;
 
+import javax.validation.Valid;
 import org.mvc2.DAO.PersonDAO;
 import org.mvc2.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -37,8 +39,10 @@ public class PeopleContoller {
     }
 
     @PostMapping() // POST должен быть определён отдельно, нельзя вызвать без отправки данных в POST
-    public String newP(@RequestParam("pers") String pers) {
-        personDAO.getPeople().add(new Person(personDAO.p_count(), pers));
+    public String newP(@RequestParam("name") String name,
+                       @RequestParam("age") int age,
+                       @RequestParam("email") String email) {
+        personDAO.getPeople().add(new Person(personDAO.p_count(), name, age, email));
         return "people/success";
     }
 //    @GetMapping("/new2") // то же самое
@@ -47,32 +51,41 @@ public class PeopleContoller {
 //        return "people/new2";
 //    }
     @GetMapping("/new2") // то же самое
-    public String newG2(@ModelAttribute("persModel") Person person) {
+    public String newG2(@ModelAttribute("persModel") Person person) { // когда отправляем из формы в html,
+        // то посылается объект только с полями заданными в форме
         return "people/new2";
     }
     @PostMapping("/p") // два post запроса не должны указывать на один URL
-    public String newP2(@ModelAttribute("persMatt") Person person) {
+    public String newP2(@ModelAttribute("persModel") @Valid Person person,
+                        BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "people/new2";
+
         personDAO.save(person);
         return "redirect:/people";
     }
 
-    @GetMapping("/edit")
-    public String editG(@ModelAttribute("editMg") Person person) {
+    @GetMapping("/{id}/edit")
+    public String editG(Model model,
+                        @PathVariable("id") int id) {
+        model.addAttribute("editMg", personDAO.show(id));
         return "people/edit";
     }
-    @PostMapping("/e") // два post запроса не должны указывать на один URL
-    public String editP(@ModelAttribute("editMp") Person person) {
-        personDAO.edit(person);
+
+    @PatchMapping("/{id}") // тк в форме назначаем только name, то приходит объект только с полем name,
+    // а id ловим из URL
+    public String editP(@ModelAttribute("editMg") @Valid Person person, BindingResult bindingResult,
+                        @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "people/edit";
+
+        personDAO.edit(id, person);
         return "redirect:/people";
     }
 
-    @GetMapping("/delete")
-    public String deleteG(@ModelAttribute("delMg") Person person) {
-        return "people/delete";
-    }
-    @PostMapping("/d") // два post запроса не должны указывать на один URL
-    public String deleteP(@ModelAttribute("delMp") Person person) {
-        personDAO.delete(person);
+    @DeleteMapping("/{id}")
+    public String deleteD(@PathVariable("id") int id) {
+        personDAO.delete(id);
         return "redirect:/people";
     }
 

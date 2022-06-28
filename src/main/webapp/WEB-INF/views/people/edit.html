@@ -5,11 +5,19 @@
   <title>Edit people</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/people/e}" th:object="${editMg}">
-  <label for="lab">Edit person, id = </label>
-  <input type="text" th:field="*{id}" id="lab2">
-  <label for="lab2">Edit person, name: </label>
-  <input type="text" th:field="*{name}" id="lab">
+<p>Edit person, id:</p>
+<p th:text="${editMg.getId()}"></p>
+<form th:method="POST" th:action="@{/people/{id}(id=${editMg.getId()})}" th:object="${editMg}">
+  <input type="hidden" name="_method" value="PATCH" />
+  <label for="lab">Edit person, name: </label>
+  <input type="text" th:field="*{name}" id="lab" />
+  <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+  <label for="lab2">Age:</label>
+  <input type="text" th:field="*{age}" id="lab2">
+  <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+  <label for="lab3">Email:</label>
+  <input type="text" th:field="*{email}" id="lab3">
+  <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
   <input type="submit" value="Submit" />
 </form>
 </body>

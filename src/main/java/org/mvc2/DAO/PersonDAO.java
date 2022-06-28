@@ -16,11 +16,11 @@ public class PersonDAO {
     {
         people = new ArrayList<>();
 
-        people.add(new Person(++PEOPLE_COUNT, "Tom"));
-        people.add(new Person(++PEOPLE_COUNT, "Bob"));
-        people.add(new Person(++PEOPLE_COUNT, "Maik"));
-        people.add(new Person(++PEOPLE_COUNT, "Greta"));
-        people.add(new Person(++PEOPLE_COUNT, "Rox"));
+        people.add(new Person(++PEOPLE_COUNT, "Tom", 23, "asd@tut.by"));
+        people.add(new Person(++PEOPLE_COUNT, "Bob", 56, "sldk@gmail.com"));
+        people.add(new Person(++PEOPLE_COUNT, "Maik", 27, "oekf@gmail.com"));
+        people.add(new Person(++PEOPLE_COUNT, "Greta", 35, "owdm@tut.by"));
+        people.add(new Person(++PEOPLE_COUNT, "Rox", 61, "ndjlk@tut.by"));
     }
 
     public int p_count() {
@@ -32,18 +32,19 @@ public class PersonDAO {
         people.add(person);
     }
 
-    public void edit(Person person) {
-        if (0 < person.getId() & person.getId() <= PEOPLE_COUNT & person.getName() != null) {
+    public void edit(int id,Person person) {
+//        if (0 < person.getId() & person.getId() <= PEOPLE_COUNT & person.getName() != null) {
 //            Objects.requireNonNull(people.stream().filter(d -> d.getId() == person.getId()).
 //                    findAny().orElse(null)).setName(person.getName());
-            show(person.getId()).setName(person.getName());
-        }
+            show(id).setName(person.getName());
+            show(id).setAge(person.getAge());
+            show(id).setEmail(person.getEmail());
+//        }
     }
 
-    public void delete(Person person) {
-        if (0 < person.getId() & person.getId() <= PEOPLE_COUNT) {
-            people.remove(show(person.getId()));
-        }
+    public void delete(int id) {
+            people.remove(show(id));
+//            people.removeIf(p -> p.getId() == id); // можно так
     }
 
     public List<Person> index() {
