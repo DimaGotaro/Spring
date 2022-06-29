@@ -33,18 +33,18 @@ public class PeopleContoller {
         return "people/show";
     }
 
-    @GetMapping("/new")
-    public String newG() {
-        return "people/new";
-    }
+//    @GetMapping("/new")
+//    public String newG() {
+//        return "people/new";
+//    }
 
-    @PostMapping() // POST должен быть определён отдельно, нельзя вызвать без отправки данных в POST
-    public String newP(@RequestParam("name") String name,
-                       @RequestParam("age") int age,
-                       @RequestParam("email") String email) {
-        personDAO.getPeople().add(new Person(personDAO.p_count(), name, age, email));
-        return "people/success";
-    }
+//    @PostMapping() // POST должен быть определён отдельно, нельзя вызвать без отправки данных в POST
+//    public String newP(@RequestParam("name") String name,
+//                       @RequestParam("age") int age,
+//                       @RequestParam("email") String email) {
+//        personDAO.getPeople().add(new Person(personDAO.p_count(), name, age, email));
+//        return "people/success";
+//    }
 //    @GetMapping("/new2") // то же самое
 //    public String newG2(Model model) {
 //        model.addAttribute("persModel", new Person());

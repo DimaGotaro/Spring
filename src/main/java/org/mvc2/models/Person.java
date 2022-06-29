@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class Person {
     private int id;
     @NotEmpty(message = "Name must not be empty!") // если поле назначается пустым выводится сообщение
-    @Size(min = 2, max = 10, message = "Name must be between 2 and 10 characters!") // размер строки
+    @Size(min = 2, max = 30, message = "Name must be between 2 and 10 characters!") // размер строки
     private String name;
     @Min(value = 1, message = "Must be greater than 1!") // минимально возможное значение
     private int age;
