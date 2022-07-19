@@ -52,7 +52,7 @@ public class SpringConfigMVC2 implements WebMvcConfigurer {
     }
 
     // для работы с jdbcTemplate
-    @Bean // после как добавили jdbc в pom.xml
+    // после как добавили jdbc в pom.xml
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 

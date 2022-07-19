@@ -6,6 +6,7 @@
 </head>
 <body>
 <form th:method="POST" th:action="@{/people/d}" th:object="${delMg}">
+  <input type="hidden" name="_method" value="DELETE" />
   <label for="lab">Delete person, id = </label>
   <input type="text" th:field="*{id}" id="lab">
   <input type="submit" value="Submit" />

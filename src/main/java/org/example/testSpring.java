@@ -1,9 +1,10 @@
 package org.example;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.text.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class testSpring {
     public static void main(String[] args) {
@@ -73,5 +74,48 @@ public class testSpring {
         muzikPlayer3.playT();
 
         context.close(); // всегда нужно закрывать
+
+        // Рефлексия
+        Myclass myclass = new Myclass();
+        int numb = myclass.getNumber();
+        String name = null;
+        System.out.println(numb + name);
+        try {
+            // для поля
+            Field name1 = myclass.getClass().getDeclaredField("name");
+            name1.setAccessible(true); // разрешили доступ для работы
+            name1.set(myclass, "new vallue");
+            name = (String) name1.get(myclass);
+
+            // для метода
+            Method method = myclass.getClass().getDeclaredMethod("printData");
+            method.setAccessible(true);
+            method.invoke(myclass); // вызов метода, первый
+        } catch (NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(numb + name); // второй
+        printData(myclass); // третий
+        System.out.println(Myclass.class.getName());
+
+        // для класса
+//        Myclass myclass1 = null;
+//        try {
+//            Class<?> aClass = Class.forName(Myclass.class.getName());
+//            myclass1 = (Myclass) aClass.newInstance();
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println(myclass1);
+    }
+    public static void printData(Object myclass) {
+        Method method = null;
+        try {
+            method = myclass.getClass().getDeclaredMethod("printData");
+            method.setAccessible(true);
+            method.invoke(myclass); // третий
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

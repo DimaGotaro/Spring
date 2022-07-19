@@ -3,6 +3,7 @@ package org.mvc2.DAO;
 //import com.sun.tools.javac.code.Attribute;
 import org.mvc2.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -45,7 +46,6 @@ public class PersonDAO {
 //            e.printStackTrace();
 //        }
 //    }
-
     public List<Person> index() {
 
         // через jdbcTemplate
