@@ -3,6 +3,7 @@ package org.example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class MuzikPlayer {
     private String name;
     @Value("${muzikPlayer2.volume}")
     private int volume;
+    @Autowired
+    @Order // упорядочить
     private List<Muzik> muz = new ArrayList<>();
 //    @Autowired
     private RockMuzik rockMuzik;
